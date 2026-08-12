@@ -1,0 +1,89 @@
+export type SalaryStructure = "rate_per_visit" | "daily_rate" | "fixed_monthly";
+
+export type EmployeeRow = {
+  id: string;
+  user_id: string | null;
+  full_name: string;
+  role: "admin" | "doctor" | "nurse" | "caregiver";
+  salary_structure: SalaryStructure;
+  rate_per_visit: number;
+  daily_rate: number;
+  fixed_monthly: number;
+  late_deduction: number;
+  pay_periods: number;
+  contact: string | null;
+  bank_details: string | null;
+  active: boolean;
+};
+
+export type AttendanceRow = {
+  id: string;
+  employee_id: string | null;
+  user_id: string;
+  type: "IN" | "OUT";
+  logged_at: string;
+  latitude: number | null;
+  longitude: number | null;
+  photo_url: string | null;
+  approved: boolean;
+};
+
+export const LATE_CUTOFF_HOUR = 8;
+
+export function peso(value: number) {
+  return new Intl.NumberFormat("en-PH", {
+    style: "currency",
+    currency: "PHP",
+    maximumFractionDigits: 2,
+  }).format(value || 0);
+}
+
+export function dayKey(iso: string) {
+  return new Date(iso).toISOString().slice(0, 10);
+}
+
+export type ComputedPayroll = {
+  employee: EmployeeRow;
+  days_worked: number;
+  visits: number;
+  lates: number;
+  gross_pay: number;
+  total_deductions: number;
+  net_pay: number;
+};
+
+/**
+ * Computes payroll for one employee from their approved attendance logs
+ * within the selected period, minus manual cash advances / deductions.
+ */
+export function computePayroll(
+  employee: EmployeeRow,
+  logs: AttendanceRow[],
+  advances: number,
+): ComputedPayroll {
+  const ins = logs.filter((l) => l.type === "IN");
+  const outs = logs.filter((l) => l.type === "OUT");
+
+  const outDays = new Set(outs.map((l) => dayKey(l.logged_at)));
+  const inDays = new Set(ins.map((l) => dayKey(l.logged_at)));
+  const completedDays = [...inDays].filter((d) => outDays.has(d));
+
+  const days_worked = completedDays.length;
+  const visits = ins.filter((l) => outDays.has(dayKey(l.logged_at))).length;
+  const lates = ins.filter((l) => new Date(l.logged_at).getHours() >= LATE_CUTOFF_HOUR).length;
+
+  let gross_pay = 0;
+  if (employee.salary_structure === "rate_per_visit") {
+    gross_pay = visits * Number(employee.rate_per_visit);
+  } else if (employee.salary_structure === "daily_rate") {
+    gross_pay = days_worked * Number(employee.daily_rate) - lates * Number(employee.late_deduction);
+  } else {
+    gross_pay = Number(employee.fixed_monthly) / Math.max(1, Number(employee.pay_periods) || 1);
+  }
+  gross_pay = Math.max(0, Math.round(gross_pay * 100) / 100);
+
+  const total_deductions = Math.round((advances || 0) * 100) / 100;
+  const net_pay = Math.round(Math.max(0, gross_pay - total_deductions) * 100) / 100;
+
+  return { employee, days_worked, visits, lates, gross_pay, total_deductions, net_pay };
+}
