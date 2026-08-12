@@ -10,33 +10,122 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ClockRouteImport } from './routes/clock'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminExpensesRouteImport } from './routes/admin.expenses'
+import { Route as AdminPayrollRouteImport } from './routes/admin.payroll'
+import { Route as AdminStaffRouteImport } from './routes/admin.staff'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClockRoute = ClockRouteImport.update({
+  id: '/clock',
+  path: '/clock',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminExpensesRoute = AdminExpensesRouteImport.update({
+  id: '/expenses',
+  path: '/expenses',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminPayrollRoute = AdminPayrollRouteImport.update({
+  id: '/payroll',
+  path: '/payroll',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminStaffRoute = AdminStaffRouteImport.update({
+  id: '/staff',
+  path: '/staff',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/clock': typeof ClockRoute
+  '/admin/expenses': typeof AdminExpensesRoute
+  '/admin/payroll': typeof AdminPayrollRoute
+  '/admin/staff': typeof AdminStaffRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/clock': typeof ClockRoute
+  '/admin/expenses': typeof AdminExpensesRoute
+  '/admin/payroll': typeof AdminPayrollRoute
+  '/admin/staff': typeof AdminStaffRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/clock': typeof ClockRoute
+  '/admin/expenses': typeof AdminExpensesRoute
+  '/admin/payroll': typeof AdminPayrollRoute
+  '/admin/staff': typeof AdminStaffRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/clock'
+    | '/admin/expenses'
+    | '/admin/payroll'
+    | '/admin/staff'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/clock'
+    | '/admin/expenses'
+    | '/admin/payroll'
+    | '/admin/staff'
+    | '/admin'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/auth'
+    | '/clock'
+    | '/admin/expenses'
+    | '/admin/payroll'
+    | '/admin/staff'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  ClockRoute: typeof ClockRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +137,79 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clock': {
+      id: '/clock'
+      path: '/clock'
+      fullPath: '/clock'
+      preLoaderRoute: typeof ClockRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/expenses': {
+      id: '/admin/expenses'
+      path: '/expenses'
+      fullPath: '/admin/expenses'
+      preLoaderRoute: typeof AdminExpensesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/payroll': {
+      id: '/admin/payroll'
+      path: '/payroll'
+      fullPath: '/admin/payroll'
+      preLoaderRoute: typeof AdminPayrollRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/staff': {
+      id: '/admin/staff'
+      path: '/staff'
+      fullPath: '/admin/staff'
+      preLoaderRoute: typeof AdminStaffRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminExpensesRoute: typeof AdminExpensesRoute
+  AdminPayrollRoute: typeof AdminPayrollRoute
+  AdminStaffRoute: typeof AdminStaffRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminExpensesRoute: AdminExpensesRoute,
+  AdminPayrollRoute: AdminPayrollRoute,
+  AdminStaffRoute: AdminStaffRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
+  AuthRoute: AuthRoute,
+  ClockRoute: ClockRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
