@@ -39,7 +39,7 @@ function AdminLayout() {
         <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-4 px-4 py-3">
           <div className="flex items-center gap-2 text-primary">
             <HeartPulse className="h-5 w-5" />
-            <span className="font-bold text-foreground">CareLedger</span>
+            <span className="font-bold text-foreground">Home Health</span>
             <span className="rounded-full bg-accent px-2 py-0.5 text-xs font-medium text-accent-foreground">
               Admin
             </span>

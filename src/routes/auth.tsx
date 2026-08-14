@@ -20,13 +20,13 @@ import {
 export const Route = createFileRoute("/auth")({
   head: () => ({
     meta: [
-      { title: "Sign in — CareLedger Staff & Admin" },
+      { title: "Sign in — Home Health Staff & Admin" },
       {
         name: "description",
         content:
-          "Sign in to CareLedger to clock in with GPS and photo verification or manage payroll as an administrator.",
+          "Sign in to Home Health to clock in with GPS and photo verification or manage payroll as an administrator.",
       },
-      { property: "og:title", content: "Sign in — CareLedger" },
+      { property: "og:title", content: "Sign in — Home Health" },
       {
         property: "og:description",
         content: "Secure access for home care staff and payroll administrators.",
@@ -84,7 +84,7 @@ function AuthPage() {
       <div className="w-full max-w-md">
         <div className="mb-6 flex items-center justify-center gap-2 text-primary">
           <HeartPulse className="h-7 w-7" />
-          <span className="text-xl font-bold tracking-tight text-foreground">CareLedger</span>
+          <span className="text-xl font-bold tracking-tight text-foreground">Home Health</span>
         </div>
         <Card className="border-border shadow-[var(--shadow-card)]">
           <CardHeader>

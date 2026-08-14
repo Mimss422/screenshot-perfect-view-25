@@ -42,13 +42,13 @@ import {
 export const Route = createFileRoute("/admin/payroll")({
   head: () => ({
     meta: [
-      { title: "Payroll Processing — CareLedger Admin" },
+      { title: "Payroll Processing — Home Health Admin" },
       {
         name: "description",
         content:
           "Generate payroll from verified attendance: per-visit fees, daily rates with late deductions, fixed monthly salaries and cash advances.",
       },
-      { property: "og:title", content: "Payroll Processing — CareLedger Admin" },
+      { property: "og:title", content: "Payroll Processing — Home Health Admin" },
       {
         property: "og:description",
         content: "Automated payroll computation and printable salary receipts.",

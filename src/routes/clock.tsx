@@ -12,13 +12,13 @@ import { Badge } from "@/components/ui/badge";
 export const Route = createFileRoute("/clock")({
   head: () => ({
     meta: [
-      { title: "Staff Clock In — CareLedger" },
+      { title: "Staff Clock In — Home Health" },
       {
         name: "description",
         content:
           "Home care staff clock in and out with live GPS and photo verification, and submit daily service notes.",
       },
-      { property: "og:title", content: "Staff Clock In — CareLedger" },
+      { property: "og:title", content: "Staff Clock In — Home Health" },
       {
         property: "og:description",
         content: "GPS and photo verified time in / time out for field healthcare staff.",
@@ -270,7 +270,7 @@ function ClockPage() {
         <div className="mx-auto flex max-w-lg items-center justify-between px-4 py-4">
           <div className="flex items-center gap-2 text-primary">
             <HeartPulse className="h-5 w-5" />
-            <span className="font-bold text-foreground">CareLedger</span>
+            <span className="font-bold text-foreground">Home Health</span>
           </div>
           <div className="flex items-center gap-2">
             {!online && (

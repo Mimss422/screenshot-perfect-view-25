@@ -15,13 +15,13 @@ const StaffMap = lazy(() => import("@/components/StaffMap"));
 export const Route = createFileRoute("/admin/")({
   head: () => ({
     meta: [
-      { title: "Live Staff Monitoring — CareLedger Admin" },
+      { title: "Live Staff Monitoring — Home Health Admin" },
       {
         name: "description",
         content:
           "Track clocked-in home care staff on a live map with photo-verified time-in activity and daily notes.",
       },
-      { property: "og:title", content: "Live Staff Monitoring — CareLedger Admin" },
+      { property: "og:title", content: "Live Staff Monitoring — Home Health Admin" },
       {
         property: "og:description",
         content: "Real-time GPS map and verification feed for field healthcare staff.",

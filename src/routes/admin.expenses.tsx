@@ -23,13 +23,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 export const Route = createFileRoute("/admin/expenses")({
   head: () => ({
     meta: [
-      { title: "Expense Reports — CareLedger Admin" },
+      { title: "Expense Reports — Home Health Admin" },
       {
         name: "description",
         content:
           "Monthly salary expense trends, cost split by staff role, and cash advance totals for your home care operation.",
       },
-      { property: "og:title", content: "Expense Reports — CareLedger Admin" },
+      { property: "og:title", content: "Expense Reports — Home Health Admin" },
       {
         property: "og:description",
         content: "Track payroll cost trends and cost distribution by role.",
