@@ -37,13 +37,13 @@ import {
 export const Route = createFileRoute("/admin/staff")({
   head: () => ({
     meta: [
-      { title: "Staff & Salary Structures — CareLedger Admin" },
+      { title: "Staff & Salary Structures — Home Health Admin" },
       {
         name: "description",
         content:
           "Add doctors, nurses, caregivers and admin staff, and attach the payroll rule that applies to each of them.",
       },
-      { property: "og:title", content: "Staff & Salary Structures — CareLedger Admin" },
+      { property: "og:title", content: "Staff & Salary Structures — Home Health Admin" },
       {
         property: "og:description",
         content: "Manage home care staff records and salary structures.",

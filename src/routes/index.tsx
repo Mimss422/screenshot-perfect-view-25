@@ -7,13 +7,13 @@ import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "CareLedger — Home Care Attendance & Payroll" },
+      { title: "Home Health — Home Care Attendance & Payroll" },
       {
         name: "description",
         content:
           "Verified GPS and photo clock-ins for doctors, nurses and caregivers, with automated payroll built from every approved shift.",
       },
-      { property: "og:title", content: "CareLedger — Home Care Attendance & Payroll" },
+      { property: "og:title", content: "Home Health — Home Care Attendance & Payroll" },
       {
         property: "og:description",
         content:
@@ -39,7 +39,7 @@ function Index() {
         <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-2 font-bold">
             <Activity className="h-5 w-5 text-primary" />
-            CareLedger
+            Home Health
           </div>
           <Button asChild size="sm">
             <Link to="/auth">Sign in</Link>
