@@ -140,7 +140,7 @@ export type Database = {
       employees: {
         Row: {
           active: boolean
-          bank_details: string | null
+          archived_at: string | null
           contact: string | null
           created_at: string
           daily_rate: number
@@ -148,6 +148,8 @@ export type Database = {
           full_name: string
           id: string
           late_deduction: number
+          passcode_hash: string | null
+          passcode_set_at: string | null
           pay_periods: number
           rate_per_visit: number
           role: Database["public"]["Enums"]["app_role"]
@@ -156,7 +158,7 @@ export type Database = {
         }
         Insert: {
           active?: boolean
-          bank_details?: string | null
+          archived_at?: string | null
           contact?: string | null
           created_at?: string
           daily_rate?: number
@@ -164,6 +166,8 @@ export type Database = {
           full_name: string
           id?: string
           late_deduction?: number
+          passcode_hash?: string | null
+          passcode_set_at?: string | null
           pay_periods?: number
           rate_per_visit?: number
           role?: Database["public"]["Enums"]["app_role"]
@@ -172,7 +176,7 @@ export type Database = {
         }
         Update: {
           active?: boolean
-          bank_details?: string | null
+          archived_at?: string | null
           contact?: string | null
           created_at?: string
           daily_rate?: number
@@ -180,6 +184,8 @@ export type Database = {
           full_name?: string
           id?: string
           late_deduction?: number
+          passcode_hash?: string | null
+          passcode_set_at?: string | null
           pay_periods?: number
           rate_per_visit?: number
           role?: Database["public"]["Enums"]["app_role"]
@@ -190,11 +196,13 @@ export type Database = {
       }
       payroll_records: {
         Row: {
+          cash_advance: number
           days_worked: number
           employee_id: string
           generated_at: string
           gross_pay: number
           id: string
+          late_deduction: number
           lates: number
           net_pay: number
           period_end: string
@@ -203,11 +211,13 @@ export type Database = {
           visits: number
         }
         Insert: {
+          cash_advance?: number
           days_worked?: number
           employee_id: string
           generated_at?: string
           gross_pay?: number
           id?: string
+          late_deduction?: number
           lates?: number
           net_pay?: number
           period_end: string
@@ -216,11 +226,13 @@ export type Database = {
           visits?: number
         }
         Update: {
+          cash_advance?: number
           days_worked?: number
           employee_id?: string
           generated_at?: string
           gross_pay?: number
           id?: string
+          late_deduction?: number
           lates?: number
           net_pay?: number
           period_end?: string
@@ -290,6 +302,14 @@ export type Database = {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
+        Returns: boolean
+      }
+      set_staff_passcode: {
+        Args: { _employee_id: string; _passcode: string }
+        Returns: undefined
+      }
+      verify_staff_passcode: {
+        Args: { _employee_id: string; _passcode: string }
         Returns: boolean
       }
     }
