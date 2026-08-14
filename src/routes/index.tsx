@@ -7,13 +7,13 @@ import { Button } from "@/components/ui/button";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Home Health — Home Care Attendance & Payroll" },
+      { title: "Home Health — Staff Attendance & Payroll" },
       {
         name: "description",
         content:
           "Verified GPS and photo clock-ins for doctors, nurses and caregivers, with automated payroll built from every approved shift.",
       },
-      { property: "og:title", content: "Home Health — Home Care Attendance & Payroll" },
+      { property: "og:title", content: "Home Health — Staff Attendance & Payroll" },
       {
         property: "og:description",
         content:

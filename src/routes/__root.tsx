@@ -79,13 +79,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Home Health — Home Care Payroll & Attendance" },
+      { title: "Home Health — Staff Payroll & Attendance" },
       {
         name: "description",
         content:
           "GPS and photo verified attendance for home care staff, with automated payroll for doctors, nurses and caregivers.",
       },
-      { property: "og:title", content: "Home Health — Home Care Payroll & Attendance" },
+      { property: "og:title", content: "Home Health — Staff Payroll & Attendance" },
       {
         property: "og:description",
         content: "GPS and photo verified attendance with automated payroll processing.",
